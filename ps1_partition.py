@@ -22,4 +22,15 @@ def get_partitions(set_):
 ### to see what get_partitions does if you want to visualize it:
 
 #for item in (get_partitions(['a','b','c','d'])):
+#     print(len(item))
 #     print(item)
+#fib=get_partitions((['a','b','c','d']))
+#print(fib.__next__())
+#print(fib.__next__())
+'''
+cows={'Lotus': 10, 'Patches': 60, 'Muscles': 65, 'MooMoo': 85}
+for ship in get_partitions(cows.keys()):
+    print(ship)
+    for cow in ship:
+        print(cow)
+        '''
