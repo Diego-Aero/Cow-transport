@@ -110,8 +110,32 @@ def brute_force_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
-    pass
+    cowsCopy=cows.copy()
+    result_prev=[]
+    result=[]
+    for ship in (get_partitions(cowsCopy.keys())):
+        #Primero un viaje, luego dos, después 3...
+        #ship es una lista con las vacas almacenadas:
+        #[['c', 'd', 'a', 'b']] luego [['c', 'd', 'b'], ['a']] luego [['c', 'd', 'a'], ['b']]
+        band=0
+        for config in ship:
+            totalWeight=0
+            #Vemos las vaca en cada nave/viaje
+            for cow in config:
+                #cow es un string con el nombre de la vaca, es un item
+                totalWeight+=cowsCopy[cow]
+            if totalWeight<=limit:
+                #Ccon la bandera nos servimos para ver si cada nave no pasa de su peso límite
+                #También se puede hacer con un bool overload=True/False
+                band+=1
+        if band==len(ship):
+            #Si hay tantas naves como configuraciones que cumplen con el peso, tenemos resultado válido
+            #Falta comprobar que no haya otro mejor con menor número de viajes
+            result_prev=ship
+        if (len(result_prev)<len(result) or result==[]):
+            #Para elegir el menor resultado, puesto que get_partitions no trabaja con dimensiones crecientes
+            result=result_prev
+    return result
 
         
 # Problem 3
