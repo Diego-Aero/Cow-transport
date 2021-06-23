@@ -58,14 +58,9 @@ def greedy_cow_transport(cows,limit=10):
     cowsCopy=cows.copy()
     #Hacemos una copia para no alterar el original
     
-    #Python viejo no admite esta forma de ordenar que diseñé
-    sorted_dict={}
-    sorted_keys=sorted(cowsCopy, key=cowsCopy.get, reverse=True)
-    #The sorted expression will return the list of keys whose values are sorted in order.
-    #From there, we can create a new, sorted dictionary:
-    for w in sorted_keys:
-        sorted_dict[w]=cowsCopy[w]
-        #Ordenamos el diccionario
+    #Para python viejo se utiliza esto
+    from collections import OrderedDict
+    sorted_dict=OrderedDict(sorted(cowsCopy.items(), key=lambda item: item[1], reverse=True))
     
     
     totalWeight=0
