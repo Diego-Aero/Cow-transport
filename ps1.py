@@ -54,8 +54,39 @@ def greedy_cow_transport(cows,limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
-    pass
+    
+    cowsCopy=cows.copy()
+    #Hacemos una copia para no alterar el original
+    
+    #Python viejo no admite esta forma de ordenar que diseñé
+    sorted_dict={}
+    sorted_keys=sorted(cowsCopy, key=cowsCopy.get, reverse=True)
+    #The sorted expression will return the list of keys whose values are sorted in order.
+    #From there, we can create a new, sorted dictionary:
+    for w in sorted_keys:
+        sorted_dict[w]=cowsCopy[w]
+        #Ordenamos el diccionario
+    
+    
+    totalWeight=0
+    result_prev=[]
+    result=[]
+    i=0
+    while sorted_dict!={}:
+        for cows in sorted_dict.keys():
+            if (totalWeight+sorted_dict[cows])<=limit:
+                result_prev.append(cows)
+                totalWeight+=sorted_dict[cows]
+                #Esto se hace para cada nave/viaje
+        for i in result_prev:
+            sorted_dict.pop(i)
+            #Eliminamos del diccionario las vacas que hemos escogido
+        result.append(result_prev)
+        #Añadimos las vacas escogidas a la lista que contiene todas las naves/viajes
+        result_prev=[]
+        totalWeight=0
+        #Reiniciamos los valores de peso y vacas del viaje en concreto
+    return result
 
 
 # Problem 2
